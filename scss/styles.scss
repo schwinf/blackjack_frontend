@@ -1,0 +1,156 @@
+@import "variables";
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    grid-gap: 10px;
+    padding: 10px;
+    background-image: url("../img/blackjackBG.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center; 
+    
+}
+  
+.grid-container > div {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 30px;
+}
+
+.item1 {
+    text-align: right;
+}
+
+.item2 {
+    grid-column-start: 2;
+    grid-column-end: 5;
+    height: 200px;
+    border-radius: 30px;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.item3 {
+    background-image: url("../img/deck_icon.png");
+    background-repeat: no-repeat;
+    background-position: center; 
+}
+
+.item6 {
+    height: 350px;
+}
+
+.item8 {
+    height: 350px;
+}
+
+.item10 {
+    height: 200px;
+    grid-column-start: 2;
+    grid-column-end: 5;
+    border-radius: 30px;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.item11 {
+    background-image: url("../img/bet.png");
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center; 
+}
+
+.card {
+    height: 150px;
+}
+
+.anteBox {
+    text-align: center;
+}
+
+.playerMoney {
+    text-align: center;
+}
+
+.top-space-45 {
+    height: 45%;
+}
+
+.playerMoney {
+    width: 80%;
+    height: 50px;
+    font-size: 24px;
+    color:black;
+    border-radius: 30px;
+}
+
+.playIcons {
+    height: 20px;
+}
+
+#hit-button {
+    height: 50px;
+    width: 150px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    font-size: 16px;
+}
+
+#hit-button:hover {
+    background-color: #cfcfcf;
+    border: none;
+}
+
+#stay-button {
+    height: 50px;
+    width: 150px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    font-size: 16px;
+}
+
+#stay-button:hover {
+    background-color: #cfcfcf;
+    border: none;
+}
+
+#quit-button {
+    height: 50px;
+    width: 150px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    font-size: 16px;
+}
+
+#quit-button:hover {
+    background-color: #cfcfcf;
+    border: none;
+}
+
+#amount-min:hover {
+    color: gold;
+}
+
+#amount-plus:hover {
+    color: gold;
+}
+
+#new-game-button {
+    height: 50px;
+    width: 400px;
+    font-size: 16px;
+}
+
+#new-game-button:hover {
+    background-color: #cfcfcf;
+    border: none;
+}
+
+#dealer-text-area{
+    color: $primary-color;
+    font-family: $menu-font;
+}
+
+#player-text-area{
+    color: $primary-color;
+    font-family: $menu-font;
+}
