@@ -88,8 +88,6 @@ anteButton.addEventListener('click', function() {
     document.getElementById("anteBox").value = ante;
     showStatus();
     checkForEndGame();
-
-    console.log(deck);
 });
 
 hitButton.addEventListener('click', function() {
@@ -322,7 +320,6 @@ function showStatus() {
     }
 
     dealerTextArea.innerHTML = dealerCardString;
-    //playerTextArea.innerHTML = 'Player has: \n' + playerCardString + '(score: ' + playerScore +  deck[0] + ')';
     playerTextArea.innerHTML = playerCardString;
 
     if(gameOver) {
