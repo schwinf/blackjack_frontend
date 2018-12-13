@@ -121,7 +121,7 @@ minButton.addEventListener('click', function() {
 
 function checkForEndGame(){
     updateScores();
-    while(dealerScore < playerScore 
+    while(dealerScore <= playerScore 
             && isStaying
             && playerScore != 21
             && dealerScore <= 17) {
