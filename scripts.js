@@ -325,7 +325,7 @@ function showStatus() {
     let dealerCardString = '';
     for(let i=0; i < dealerCards.length; i++) {
         if(dealerCards.length === 2 && isStaying === false){
-            dealerCards[1].image = "/Users/frank/Documents/front_end_web/pluralSight_blackjack/img/cards/card_back.svg";
+            dealerCards[1].image = "img/cards/card_back.svg";
         }
         else if(isStaying){
             dealerCards[1].image = downCard;
