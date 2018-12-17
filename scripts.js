@@ -11,12 +11,14 @@ let minButton = document.getElementById('amount-min');
 let anteButton = document.getElementById('ante-button');
 let playerMoneyBox = document.getElementById('player-money');
 let quitButton = document.getElementById('quit-button');
+let doubleDownButton = document.getElementById('double-down-button');
 
 let gameStarted = false,
     gameOver = false,
     playerWon = false,
     isStaying = false,
     isTied = false,
+    hasDoubleDowned = false;
     dealerCards = [],
     downCard = '',
     playerCards = [],
@@ -32,6 +34,7 @@ hitButton.style.display = "none";
 stayButton.style.display = "none";
 addButton.style.display = "none";
 minButton.style.display = "none";
+doubleDownButton.style.display = "none";
 document.getElementById("item1").style.display = "none";
 document.getElementById("item9").style.display  = "none";
 document.getElementById("item11").style.display = "none";
@@ -46,9 +49,11 @@ newGameButton.addEventListener('click', function() {
     addButton.style.display = "inline";
     minButton.style.display = "inline";
     anteButton.style.display = "inline"
+    doubleDownButton.style.display = "inline";
     anteButton.disabled = false;
     hitButton.disabled = true;
     stayButton.disabled = true;
+    doubleDownButton.disabled = true;
     document.getElementById("anteBox").value = ante;
     document.getElementById("item1").style.display  = "inline";
     document.getElementById("item9").style.display = "inline";
@@ -70,12 +75,12 @@ anteButton.addEventListener('click', function() {
     anteButton.disabled = true;
     hitButton.disabled = false;
     stayButton.disabled = false;
+    doubleDownButton.disabled = false;
 
     deck = createDeck();
     addImages(deck);
     shuffleDeck(deck);
-    playerCards = [ getNextCard(), getNextCard() ];
-    dealerCards = [ getNextCard(), getNextCard() ];
+    startDeal();
     downCard = dealerCards[1].image;
 
     playerTextArea.innerText = 'Started...';
@@ -91,6 +96,7 @@ anteButton.addEventListener('click', function() {
 });
 
 hitButton.addEventListener('click', function() {
+    doubleDownButton.disabled = true;
     playerCards.push(getNextCard());
     checkForEndGame();
     showStatus();
@@ -103,6 +109,16 @@ stayButton.addEventListener('click', function() {
     showStatus();
 });
 
+doubleDownButton.addEventListener('click', function() {
+    playerCards.push(getNextCard());
+    hasDoubleDowned = true;
+    gameOver = true;
+    isStaying = true;
+    playerMoney -= ante;
+    ante *= 2;
+    checkForEndGame();
+    showStatus();
+});
 addButton.addEventListener('click', function() {
     if(playerMoney > ante){
         ante += 25;
@@ -284,6 +300,13 @@ function getScore(cardArray){
     return score;
 }
 
+function startDeal(){
+    playerCards.push(getNextCard());
+    dealerCards.push(getNextCard());
+    playerCards.push(getNextCard());
+    dealerCards.push(getNextCard());
+}
+
 function updateScores() {
     dealerScore = getScore(dealerCards);
     playerScore = getScore(playerCards);
@@ -292,7 +315,7 @@ function updateScores() {
 function showStatus() {
     if(!gameStarted){
         dealerTextArea.innerText = '';
-        playerTextArea.innerText = 'Welcome to Black Jack!';
+        playerTextArea.innerText = 'Welcome to Blackjack!';
         return;
     }
     playerMoneyBox.value = "$" + playerMoney;
@@ -325,22 +348,23 @@ function showStatus() {
     if(gameOver) {
         hitButton.disabled = true;
         stayButton.disabled = true;
+        doubleDownButton.disabled = true;
         if(playerWon) {
-            playerTextArea.innerHTML = "You Win! With a score of: " + playerScore + "<br>" + playerCardString;
-            dealerTextArea.innerHTML =  "Dealer Score: " + dealerScore + "<br>" + dealerCardString;
+            playerTextArea.innerHTML = "You Win! With a score of " + playerScore + "<br>" + playerCardString;
+            dealerTextArea.innerHTML =  "Dealer score is " + dealerScore + "<br>" + dealerCardString;
             playerMoney = playerMoney + (ante*2);
             playerMoneyBox.value = playerMoney;
         }
         else if(isTied){
-            playerTextArea.innerHTML = "It's a Draw! With a score of: " + playerScore + "<br>" + playerCardString;
-            dealerTextArea.innerHTML =  "It's a Draw! With a score of: "  + dealerScore + "<br>" + dealerCardString;
+            playerTextArea.innerHTML = "It's a Draw! With a score of " + playerScore + "<br>" + playerCardString;
+            dealerTextArea.innerHTML =  "It's a Draw! With a score of "  + dealerScore + "<br>" + dealerCardString;
             playerMoney = playerMoney + ante;
             playerMoneyBox.value = playerMoney;
             isTied = false;
         }
         else{
-            dealerTextArea.innerHTML = "Dealer Wins! With a score of: " + dealerScore + "<br>" + dealerCardString;
-            playerTextArea.innerHTML = "You Lose! With a score of: " + playerScore + "<br>" + playerCardString;
+            dealerTextArea.innerHTML = "Dealer Wins! With a score of " + dealerScore + "<br>" + dealerCardString;
+            playerTextArea.innerHTML = "You Lose! With a score of " + playerScore + "<br>" + playerCardString;
         }
 
         if(ante > playerMoney && playerMoney > 0){
@@ -357,6 +381,7 @@ function showStatus() {
             addButton.disabled = false;
             minButton.disabled = false;
             anteButton.disabled = false;
+            hasDoubleDowned = false;
             dealerCards = [];
             playerCards = [];
             dealerScore = 0;

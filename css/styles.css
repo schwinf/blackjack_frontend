@@ -93,6 +93,18 @@
   background-color: #cfcfcf;
   border: none; }
 
+#double-down-button {
+  height: 50px;
+  width: 150px;
+  -webkit-transition-duration: 0.4s;
+  /* Safari */
+  transition-duration: 0.4s;
+  font-size: 16px; }
+
+#double-down-button:hover {
+  background-color: #cfcfcf;
+  border: none; }
+
 #quit-button {
   height: 50px;
   width: 150px;
