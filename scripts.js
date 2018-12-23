@@ -75,7 +75,11 @@ anteButton.addEventListener('click', function() {
     anteButton.disabled = true;
     hitButton.disabled = false;
     stayButton.disabled = false;
-    doubleDownButton.disabled = false;
+    if(playerMoney < ante){
+        doubleDownButton.disabled = true;
+    } else {
+        doubleDownButton.disabled = false;
+    }
 
     deck = createDeck();
     addImages(deck);
@@ -381,6 +385,7 @@ function showStatus() {
             addButton.disabled = false;
             minButton.disabled = false;
             anteButton.disabled = false;
+            doubleDownButton.disabled = false;
             hasDoubleDowned = false;
             dealerCards = [];
             playerCards = [];
